@@ -1,2 +1,3 @@
 - Bruce Tate
 - Ryan Murphy
+- Ed Taupier
