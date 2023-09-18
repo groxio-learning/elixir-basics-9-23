@@ -1,0 +1,363 @@
+elixir-basics-9-23 on  main
+➜ iex
+Erlang/OTP 26 [erts-14.0.2] [source] [64-bit] [smp:12:12] [ds:12:12:10] [async-threads:1] [jit] [dtrace]
+
+Interactive Elixir (1.15.5) - press Ctrl+C to exit (type h() ENTER for help)
+iex(1)> 42
+42
+iex(2)> IO.puts("Hello World"); 42
+Hello World
+42
+iex(3)> x = 42
+42
+iex(4)> {city, state} = 42
+** (MatchError) no match of right hand side value: 42
+    (stdlib 5.0.2) erl_eval.erl:498: :erl_eval.expr/6
+    iex:4: (file)
+iex(4)> {city, state} = {"Jacksonville", :fl}
+{"Jacksonville", :fl}
+iex(5)> city
+"Jacksonville"
+iex(6)> state
+:fl
+iex(7)> x = 43
+43
+iex(8)> x
+43
+iex(9)> Process.info self
+[
+  current_function: {Process, :info, 1},
+  initial_call: {:proc_lib, :init_p, 5},
+  status: :running,
+  message_queue_len: 0,
+  links: [],
+  dictionary: [
+    "$initial_call": {IEx.Evaluator, :init, 5},
+    "$ancestors": [#PID<0.105.0>],
+    iex_evaluator: #Reference<0.3340553423.123469825.121120>,
+    iex_history: %IEx.History{
+      queue: {[
+         {8, 43},
+         {7, 43},
+         {6, :fl},
+         {5, "Jacksonville"},
+         {4, {"Jacksonville", :fl}},
+         {3, 42},
+         {2, 42}
+       ], [{1, 42}]},
+      size: 8,
+      start: 1
+    },
+    iex_server: #PID<0.105.0>,
+    elixir_checker_info: {#PID<0.113.0>, nil}
+  ],
+  trap_exit: false,
+  error_handler: :error_handler,
+  priority: :normal,
+  group_leader: #PID<0.100.0>,
+  total_heap_size: 5172,
+  heap_size: 2586,
+  stack_size: 59,
+  reductions: 14896,
+  garbage_collection: [
+    max_heap_size: %{
+      error_logger: true,
+      include_shared_binaries: false,
+      kill: true,
+      size: 0
+    },
+    min_bin_vheap_size: 46422,
+    min_heap_size: 233,
+    fullsweep_after: 65535,
+    minor_gcs: 4
+  ],
+  suspending: []
+]
+iex(10)> x = 44
+44
+iex(11)> ^x = 42
+** (MatchError) no match of right hand side value: 42
+    (stdlib 5.0.2) erl_eval.erl:498: :erl_eval.expr/6
+    iex:11: (file)
+iex(11)> place =
+BREAK: (a)bort (A)bort with dump (c)ontinue (p)roc info (i)nfo
+       (l)oaded (v)ersion (k)ill (D)b-tables (d)istribution
+^C%
+
+elixir-basics-9-23 on  main took 14m 16.2s …
+➜ iex
+Erlang/OTP 26 [erts-14.0.2] [source] [64-bit] [smp:12:12] [ds:12:12:10] [async-threads:1] [jit] [dtrace]
+
+Interactive Elixir (1.15.5) - press Ctrl+C to exit (type h() ENTER for help)
+iex(1)> place = {"Jacksonville", :fl}
+{"Jacksonville", :fl}
+iex(2)> {city, _} = place
+{"Jacksonville", :fl}
+iex(3)> city
+"Jacksonville"
+iex(4)> value = 42
+42
+iex(5)> success = {:ok, 42}
+{:ok, 42}
+iex(6)> i
+Term
+  {:ok, 42}
+Data type
+  Tuple
+Reference modules
+  Tuple
+Implemented protocols
+  IEx.Info, Inspect
+iex(7)> IEx
+IEx
+iex(8)> IEx.Helpers
+IEx.Helpers
+iex(9)> IEx.Helpers |> exports
+b/1                            break!/1                       break!/2
+h/1                            import_file/1                  import_file/2
+import_file_if_available/1     import_if_available/1          import_if_available/2
+open/1                         t/1                            use_if_available/1
+use_if_available/2             break!/3                       break!/4
+breaks/0                       c/1                            c/2
+cd/1                           clear/0                        continue/0
+exports/0                      exports/1                      flush/0
+h/0                            i/0                            i/1
+l/1                            ls/0                           ls/1
+n/0                            next/0                         nl/1
+nl/2                           open/0                         pid/1
+pid/3                          port/1                         port/2
+pwd/0                          r/1                            recompile/0
+recompile/1                    ref/1                          ref/4
+remove_breaks/0                remove_breaks/1                reset_break/1
+reset_break/3                  respawn/0                      runtime_info/0
+runtime_info/1                 v/0                            v/1
+whereami/0                     whereami/1
+iex(10)> i place
+Term
+  {"Jacksonville", :fl}
+Data type
+  Tuple
+Reference modules
+  Tuple
+Implemented protocols
+  IEx.Info, Inspect
+iex(11)> exports Tuple
+append/2        delete_at/2     duplicate/2     insert_at/3     product/1
+sum/1           to_list/1
+iex(12)> Kernel.elem(place, 0)
+"Jacksonville"
+iex(13)> Kernel.elem(place, 1)
+:fl
+iex(14)> place |> to_list
+error: undefined function to_list/1 (there is no such import)
+  iex:14
+
+** (CompileError) cannot compile code (errors have been logged)
+
+iex(14)> place |> Tuple.to_list
+["Jacksonville", :fl]
+iex(15)> place |> Tuple.to_list |> Enum.reverse
+[:fl, "Jacksonville"]
+iex(16)> place |> Tuple.to_list |> Enum.reverse |> head
+error: undefined function head/1 (there is no such import)
+  iex:16
+
+** (CompileError) cannot compile code (errors have been logged)
+
+iex(16)> place |> Tuple.to_list |> Enum.reverse |> hd
+:fl
+iex(17)> place |> Tuple.to_list |> List.first
+"Jacksonville"
+iex(18)> place |> Tuple.to_list |> Enum.reverse |> List.first
+:fl
+iex(19)> place
+{"Jacksonville", :fl}
+iex(20)> {_, state} = place
+{"Jacksonville", :fl}
+iex(21)> state
+:fl
+iex(22)> list = ["Jacksonville", "FL"]
+["Jacksonville", "FL"]
+iex(23)> Enum.at(list, 0)
+"Jacksonville"
+iex(24)> Enum.at(list, 1)
+"FL"
+iex(25)> list |> Enum.at(1)
+"FL"
+iex(26)> list |> Enum.reverse |> hd
+"FL"
+iex(27)> list i
+error: undefined function list/1 (there is no such import)
+  iex:27
+
+** (CompileError) cannot compile code (errors have been logged)
+
+iex(27)> i list
+Term
+  ["Jacksonville", "FL"]
+Data type
+  List
+Reference modules
+  List
+Implemented protocols
+  Collectable, Enumerable, IEx.Info, Inspect, List.Chars, String.Chars
+iex(28)> exports List
+ascii_printable?/1     ascii_printable?/2     delete/2               delete_at/2
+duplicate/2            first/1                first/2                flatten/1
+flatten/2              foldl/3                foldr/3                improper?/1
+insert_at/3            keydelete/3            keyfind/3              keyfind/4
+keyfind!/3             keymember?/3           keyreplace/4           keysort/2
+keysort/3              keystore/4             keytake/3              last/1
+last/2                 myers_difference/2     myers_difference/3     pop_at/2
+pop_at/3               replace_at/3           starts_with?/2         to_atom/1
+to_charlist/1          to_existing_atom/1     to_float/1             to_integer/1
+to_integer/2           to_string/1            to_tuple/1             update_at/3
+wrap/1                 zip/1
+iex(29)> i List
+Term
+  List
+Data type
+  Atom
+Module bytecode
+  /opt/homebrew/Cellar/elixir/1.15.5/bin/../lib/elixir/ebin/Elixir.List.beam
+Source
+  /private/tmp/elixir-20230828-6830-14xd5rx/elixir-1.15.5/lib/elixir/lib/list.ex
+Version
+  [145148860998115068647104865269255509468]
+Compile options
+  [:no_spawn_compiler_process, :from_core, :no_core_prepare, :no_auto_import, :inline_list_funcs, {:inline, [last: 2]}, {:inline, [decrement: 1]}]
+Description
+  Use h(List) to access its documentation.
+  Call List.module_info() to access metadata.
+Raw representation
+  :"Elixir.List"
+Reference modules
+  Module, Atom
+Implemented protocols
+  IEx.Info, Inspect, List.Chars, String.Chars
+iex(30)> i list
+Term
+  ["Jacksonville", "FL"]
+Data type
+  List
+Reference modules
+  List
+Implemented protocols
+  Collectable, Enumerable, IEx.Info, Inspect, List.Chars, String.Chars
+iex(31)> :"List"
+:List
+iex(32)> :"List" == List
+false
+iex(33)> one.two.three
+error: undefined variable "one"
+  iex:33
+
+** (CompileError) cannot compile code (errors have been logged)
+
+iex(33)> One.Two.Three
+One.Two.Three
+iex(34)> One.Two.Three i
+** (SyntaxError) iex:34:15: syntax error before: i
+    |
+ 34 | One.Two.Three i
+    |               ^
+    (iex 1.15.5) lib/iex/evaluator.ex:294: IEx.Evaluator.parse_eval_inspect/4
+    (iex 1.15.5) lib/iex/evaluator.ex:187: IEx.Evaluator.loop/1
+    (iex 1.15.5) lib/iex/evaluator.ex:32: IEx.Evaluator.init/5
+    (stdlib 5.0.2) proc_lib.erl:241: :proc_lib.init_p_do_apply/3
+iex(34)> One.Two.Three
+One.Two.Three
+iex(35)> i
+Term
+  One.Two.Three
+Data type
+  Atom
+Raw representation
+  :"Elixir.One.Two.Three"
+Reference modules
+  Atom
+Implemented protocols
+  IEx.Info, Inspect, List.Chars, String.Chars
+iex(36)> :"Elixir.List" == List
+true
+iex(37)> i list
+Term
+  ["Jacksonville", "FL"]
+Data type
+  List
+Reference modules
+  List
+Implemented protocols
+  Collectable, Enumerable, IEx.Info, Inspect, List.Chars, String.Chars
+iex(38)> exports Enum
+all?/1                all?/2                any?/1                any?/2
+at/2                  at/3                  chunk/2               chunk/3
+chunk/4               chunk_by/2            chunk_every/2         chunk_every/3
+chunk_every/4         chunk_while/4         concat/1              concat/2
+count/1               count/2               count_until/2         count_until/3
+dedup/1               dedup_by/2            drop/2                drop_every/2
+drop_while/2          each/2                empty?/1              fetch/2
+fetch!/2              filter/2              filter_map/3          find/2
+find/3                find_index/2          find_value/2          find_value/3
+flat_map/2            flat_map_reduce/3     frequencies/1         frequencies_by/2
+group_by/2            group_by/3            intersperse/2         into/2
+into/3                join/1                join/2                map/2
+map_every/3           map_intersperse/3     map_join/2            map_join/3
+map_reduce/3          max/1                 max/2                 max/3
+max_by/2              max_by/3              max_by/4              member?/2
+min/1                 min/2                 min/3                 min_by/2
+min_by/3              min_by/4              min_max/1             min_max/2
+min_max_by/2          min_max_by/3          min_max_by/4          partition/2
+product/1             random/1              reduce/2              reduce/3
+reduce_while/3        reject/2              reverse/1             reverse/2
+reverse_slice/3       scan/2                scan/3                shuffle/1
+slice/2               slice/3               slide/3               sort/1
+sort/2                sort_by/2             sort_by/3             split/2
+split_while/2         split_with/2          sum/1                 take/2
+take_every/2          take_random/2         take_while/2          to_list/1
+uniq/1                uniq/2                uniq_by/2             unzip/1
+with_index/1          with_index/2          zip/1                 zip/2
+zip_reduce/3          zip_reduce/4          zip_with/2            zip_with/3
+iex(39)> list = [1, 2, 3]
+[1, 2, 3]
+iex(40)> Enum.map(list, &(&1 + 1))
+[2, 3, 4]
+iex(41)> Enum.map(list, fn x -> x + 1 end)
+[2, 3, 4]
+iex(42)> Enum.map(1..8, fn x -> x + 1 end)
+[2, 3, 4, 5, 6, 7, 8, 9]
+iex(43)> 1..8
+1..8
+iex(44)> i
+Term
+  1..8
+Data type
+  Range
+Description
+  This is a struct representing a range of numbers. It is commonly
+  defined using the `first..last//step` syntax. The step is not
+  required and defaults to 1.
+Raw representation
+  %Range{first: 1, last: 8, step: 1}
+Reference modules
+  Range
+Implemented protocols
+  Enumerable, IEx.Info, Inspect
+iex(45)> << 0, 1, 2 >>
+<<0, 1, 2>>
+iex(46)> i
+Term
+  <<0, 1, 2>>
+Data type
+  BitString
+Byte size
+  3
+Description
+  This is a string: a UTF-8 encoded binary. It's printed with the `<<>>`
+  syntax (as opposed to double quotes) because it contains non-printable
+  UTF-8 encoded code points (the first non-printable code point being
+  `<<0>>`).
+Reference modules
+  String, :binary
+Implemented protocols
+  Collectable, IEx.Info, Inspect, List.Chars, String.Chars
