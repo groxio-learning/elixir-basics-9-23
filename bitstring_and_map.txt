@@ -1,0 +1,220 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 iex(1)> ?a\
+97\
+iex(2)> ?b\
+98\
+iex(3)> [1, 2, 3]\
+[1, 2, 3]\
+iex(4)> [97, 98, 99]\
+~c"abc"\
+iex(5)> 'abc'\
+~c"abc"\
+iex(6)> is_list('abc')\
+true\
+iex(7)> 'abc'\
+~c"abc"\
+iex(8)> i\
+Term\
+  ~c"abc"\
+Data type\
+  List\
+Description\
+  This is a list of integers that is printed using the `~c` sigil syntax,\
+  defined by the `Kernel.sigil_c/2` macro, because all the integers in it\
+  represent printable ASCII characters. Conventionally, a list of Unicode\
+  code points is known as a charlist and a list of ASCII characters is a\
+  subset of it.\
+Raw representation\
+  [97, 98, 99]\
+Reference modules\
+  List\
+Implemented protocols\
+  Collectable, Enumerable, IEx.Info, Inspect, List.Chars, String.Chars\
+iex(9)> ~w[cats dogs]\
+["cats", "dogs"]\
+iex(10)> << 0, 1, 2 >>\
+<<0, 1, 2>>\
+iex(11)> i\
+Term\
+  <<0, 1, 2>>\
+Data type\
+  BitString\
+Byte size\
+  3\
+Description\
+  This is a string: a UTF-8 encoded binary. It's printed with the `<<>>`\
+  syntax (as opposed to double quotes) because it contains non-printable\
+  UTF-8 encoded code points (the first non-printable code point being\
+  `<<0>>`).\
+Reference modules\
+  String, :binary\
+Implemented protocols\
+  Collectable, IEx.Info, Inspect, List.Chars, String.Chars\
+iex(12)> "cat"\
+"cat"\
+iex(13)> i\
+Term\
+  "cat"\
+Data type\
+  BitString\
+Byte size\
+  3\
+Description\
+  This is a string: a UTF-8 encoded binary. It's printed surrounded by\
+  "double quotes" because all UTF-8 encoded code points in it are printable.\
+Raw representation\
+  <<99, 97, 116>>\
+Reference modules\
+  String, :binary\
+Implemented protocols\
+  Collectable, IEx.Info, Inspect, List.Chars, String.Chars\
+iex(14)> << 99, 116, 97 >>\
+"cta"\
+iex(15)> << 99, 97, 116 >>\
+"cat"\
+iex(16)> << 99, 97, 116 >> |> String.graphemes\
+["c", "a", "t"]\
+iex(17)> << 99, 97, 116 >> |> to_list\
+error: undefined function to_list/1 (there is no such import)\
+  iex:17\
+\
+** (CompileError) cannot compile code (errors have been logged)\
+\
+iex(17)> << 99, 97, 116 >> |> :binary.to_list\
+** (UndefinedFunctionError) function :binary.to_list/1 is undefined or private. Did you mean:\
+\
+      * bin_to_list/1\
+      * bin_to_list/2\
+      * bin_to_list/3\
+\
+    (stdlib 4.3.1.2) :binary.to_list("cat")\
+    iex:17: (file)\
+iex(17)> << 99, 97, 116 >> |> BitString.to_list\
+** (UndefinedFunctionError) function BitString.to_list/1 is undefined (module BitString is not available)\
+    BitString.to_list("cat")\
+    iex:17: (file)\
+iex(17)> << 99, 97, 116 >> |> bin_to_list\
+error: undefined function bin_to_list/1 (there is no such import)\
+  iex:17\
+\
+** (CompileError) cannot compile code (errors have been logged)\
+\
+iex(17)> << 99, 97, 116 >> |> :binary.bin_to_list\
+~c"cat"\
+iex(18)> [97, 98, 99] == 'abc'\
+true\
+iex(19)> [one: 1, two: 2]\
+[one: 1, two: 2]\
+iex(20)> i\
+Term\
+  [one: 1, two: 2]\
+Data type\
+  List\
+Description\
+  This is what is referred to as a "keyword list". A keyword list is a list\
+  of two-element tuples where the first element of each tuple is an atom.\
+Reference modules\
+  Keyword, List\
+Implemented protocols\
+  Collectable, Enumerable, IEx.Info, Inspect, List.Chars, String.Chars\
+iex(21)> exit\
+error: undefined variable "exit"\
+  iex:21\
+\
+** (CompileError) cannot compile code (errors have been logged)\
+\
+iex(21)>\
+BREAK: (a)bort (A)bort with dump (c)ontinue (p)roc info (i)nfo\
+       (l)oaded (v)ersion (k)ill (D)b-tables (d)istribution\
+^C%\
+\uc0\u10140   elixir-basics-9-23 git:(main) \u10007  iex\
+No version is set for command erl\
+Consider adding one of the following versions in your config file at /Users/michael.phan/.tool-versions\
+erlang 25.1.2\
+erlang 25.3.2.3\
+\uc0\u10140   elixir-basics-9-23 git:(main) \u10007  asdf local erlang 25.3.2.3\
+\uc0\u10140   elixir-basics-9-23 git:(main) \u10007  iex\
+Erlang/OTP 25 [erts-13.2.2.2] [source] [64-bit] [smp:10:10] [ds:10:10:10] [async-threads:1] [jit]\
+\
+Interactive Elixir (1.15.2) - press Ctrl+C to exit (type h() ENTER for help)\
+iex(1)> map = %\{one: 1, two: 2\}\
+%\{one: 1, two: 2\}\
+iex(2)> i\
+Term\
+  %\{one: 1, two: 2\}\
+Data type\
+  Map\
+Reference modules\
+  Map\
+Implemented protocols\
+  Collectable, Enumerable, IEx.Info, Inspect\
+iex(3)> Map.\
+delete/2             drop/2               equal?/2\
+fetch!/2             fetch/2              filter/2\
+from_keys/2          from_struct/1        get/2\
+get/3                get_and_update!/3    get_and_update/3\
+get_lazy/3           has_key?/2           intersect/2\
+intersect/3          keys/1               merge/2\
+merge/3              new/0                new/1\
+new/2                pop!/2               pop/2\
+pop/3                pop_lazy/3           put/3\
+put_new/3            put_new_lazy/3       reject/2\
+replace!/3           replace/3            replace_lazy/3\
+split/2              split_with/2         take/2\
+to_list/1            update!/3            update/4\
+values/1\
+iex(3)> Map.get(map, :one)\
+1\
+iex(4)> Map.get(map, :three)\
+nil\
+iex(5)> Map.fetch(map, :three)\
+:error\
+iex(6)> Map.fetch!(map, :three)\
+** (KeyError) key :three not found in: %\{one: 1, two: 2\}\
+    (stdlib 4.3.1.2) :maps.get(:three, %\{one: 1, two: 2\})\
+    iex:6: (file)\
+iex(6)> %\{map | one: "1"\}\
+%\{one: "1", two: 2\}\
+iex(7)> for x <- 1..8, do: \{x, x*2\}\
+[\{1, 2\}, \{2, 4\}, \{3, 6\}, \{4, 8\}, \{5, 10\}, \{6, 12\}, \{7, 14\}, \{8, 16\}]\
+iex(8)> for x <- 1..8, x >= 3, do: \{x, x*2\}\
+[\{3, 6\}, \{4, 8\}, \{5, 10\}, \{6, 12\}, \{7, 14\}, \{8, 16\}]\
+iex(9)> for x <- 1..8, x >= 3, into: %\{\}, do: \{x, x*2\}\
+%\{3 => 6, 4 => 8, 5 => 10, 6 => 12, 7 => 14, 8 => 16\}\
+iex(10)> for x <- 1..3, w <- ?a..?c, do: \{x, w\}\
+[\
+  \{1, 97\},\
+  \{1, 98\},\
+  \{1, 99\},\
+  \{2, 97\},\
+  \{2, 98\},\
+  \{2, 99\},\
+  \{3, 97\},\
+  \{3, 98\},\
+  \{3, 99\}\
+]\
+iex(11)> defmodule User do\
+...(11)> defstruct [:name, :age]\
+...(11)> end\
+\{:module, User,\
+ <<70, 79, 82, 49, 0, 0, 8, 8, 66, 69, 65, 77, 65, 116, 85, 56, 0, 0, 0, 247, 0,\
+   0, 0, 22, 11, 69, 108, 105, 120, 105, 114, 46, 85, 115, 101, 114, 8, 95, 95,\
+   105, 110, 102, 111, 95, 95, 10, 97, ...>>, %User\{name: nil, age: nil\}\}\
+iex(12)> User.__struct__\
+%User\{name: nil, age: nil\}\
+iex(13)> u = v 12\
+%User\{name: nil, age: nil\}\
+iex(14)> is_map u\
+true\
+iex(15)> is_struct u\
+true\
+iex(16)> Map.keys u\
+[:__struct__, :age, :name]\
+iex(17)> u.__struct__\
+User}
