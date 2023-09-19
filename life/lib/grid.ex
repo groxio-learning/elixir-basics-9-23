@@ -1,8 +1,8 @@
 defmodule Life.Grid do
   alias Life.Cell
 
-  @width 5
-  @height 5
+  @width 180
+  @height 45
 
   def random do
     for(r <- 1..@height, c <- 1..@width, do: {r, c})
