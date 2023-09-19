@@ -1,20 +1,27 @@
 defmodule Life.Grid do
-  @width 180
-  @height 45
+  alias Life.Cell
+
+  @width 5
+  @height 5
 
   def random do
-    (for r <- 1..@height, c <- 1..@width, do: {r, c})
-    |> Enum.shuffle
-    |> Enum.take(round(180 * 45 / 2))
-    |> MapSet.new
+    for(r <- 1..@height, c <- 1..@width, do: {r, c})
+    |> Enum.shuffle()
+    |> Enum.take(round(@width * @height / 2))
+    |> MapSet.new()
   end
 
   def repeater do
     for r <- [3], c <- 2..4, into: MapSet.new(), do: {r, c}
   end
 
-  def generate(grid) do
-    grid
+  def evolve(grid) do
+    for r <- 1..@height,
+        c <- 1..@width,
+        Cell.alive?(Cell.new(grid, {r, c}), neighbor_count(grid, {r, c})),
+        into: MapSet.new() do
+      {r, c}
+    end
   end
 
   def show(grid) do
@@ -29,8 +36,21 @@ defmodule Life.Grid do
     cond do
       MapSet.member?(grid, cell) ->
         "x"
+
       true ->
-        "o"
+        "_"
     end
+  end
+
+  def neighbor_count(grid, {r, c}) do
+    for(
+      br <- (r - 1)..(r + 1),
+      bc <- (c - 1)..(c + 1),
+      {br, bc} != {r, c},
+      into: MapSet.new(),
+      do: {br, bc}
+    )
+    |> MapSet.intersection(grid)
+    |> MapSet.size()
   end
 end
